@@ -23,11 +23,12 @@ namespace SO_NAIJI
             {
                 foreach (string SoNo in targetSoNo)
                 {
+                    strategy = new SimpleTextExtractionStrategy();
                     if (PdfTextExtractor.GetTextFromPage(pdfReader, pageNum, strategy).ToString().Contains(SoNo))
                     {
                         pages.Add(pageNum);
+                        break;
                     }
-                    strategy = new SimpleTextExtractionStrategy();
                 }
             }
             objPDFCopy.AddDocument(pdfReader, pages);
