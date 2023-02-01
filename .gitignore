@@ -1,0 +1,5 @@
+SQL_ignore.cs
+bin/*
+obj/*
+packages/*
+.vs/*
