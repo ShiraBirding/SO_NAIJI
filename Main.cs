@@ -30,6 +30,7 @@ namespace SO_NAIJI
         public string _txtOrderDate;
         public string _strPDFstate;
         public string _strPDFtag;
+        public string _strPDForder;
 
         public void MainExecute()
         {
@@ -49,6 +50,7 @@ namespace SO_NAIJI
             string txtOrderDate = _txtOrderDate;
             string strPDFstate = _strPDFstate;
             string strPDFtag = _strPDFtag;
+            string strPDForder = _strPDForder;
 
             try
             {
@@ -135,7 +137,7 @@ namespace SO_NAIJI
 
                     if (boolCopyPDF)
                     {
-                        CopyPDF(drSO, txtOrderDate, CustSoNoName, InputFolderPath, OutputFolderPath, strPDFstate, strPDFtag);
+                        CopyPDF(drSO, txtOrderDate, CustSoNoName, InputFolderPath, OutputFolderPath, strPDFstate, strPDFtag,strPDForder);
                         MessageBox.Show("PDFファイルをコピーしました");
                     }
                 }
@@ -275,7 +277,7 @@ namespace SO_NAIJI
             writer.Close();//保存
         }
 
-        public void CopyPDF(DataRow[] datarow, string txtOrderDate, string CustSoNoName, string InputFolderPath, string OutputFolderPath, string strPDFstate, string strPDFtag)
+        public void CopyPDF(DataRow[] datarow, string txtOrderDate, string CustSoNoName, string InputFolderPath, string OutputFolderPath, string strPDFstate, string strPDFtag,string strPDForder)
         {
             HashSet<string> receiveDates = new HashSet<string>();
             HashSet<string> SoNoList = new HashSet<string>();
@@ -293,10 +295,15 @@ namespace SO_NAIJI
             Document tagDoc = new Document();
             PdfCopy tagCopy = new PdfCopy(tagDoc, new FileStream(OutputFolderPath + @"\" + strPDFtag + "_" + System.DateTime.Now.ToString("yyyyMMdd") + ".pdf", FileMode.Create));
 
+            Document orderDoc = new Document();
+            PdfCopy orderCopy = new PdfCopy(orderDoc, new FileStream(OutputFolderPath + @"\" + strPDForder + "_" + System.DateTime.Now.ToString("yyyyMMdd") + ".pdf", FileMode.Create));
+
             stateDoc.Open();
             stateCopy.Open();
             tagDoc.Open();
             tagCopy.Open();
+            orderDoc.Open();
+            orderCopy.Open();
 
             if (receiveDates.Count > 0)
             {
@@ -304,6 +311,7 @@ namespace SO_NAIJI
                 {
                     string[] statePaths = Directory.GetFiles(InputFolderPath, "*" + strPDFstate + "*" + receiveDate + "*.pdf", System.IO.SearchOption.AllDirectories);
                     string[] tagPaths = Directory.GetFiles(InputFolderPath, "*" + strPDFtag + "*" + receiveDate + "*.pdf", System.IO.SearchOption.AllDirectories);
+                    string[] orderPaths = Directory.GetFiles(InputFolderPath, "*" + strPDForder + "*" + receiveDate + "*.pdf", System.IO.SearchOption.AllDirectories);
 
                     if (strPDFstate != null && strPDFstate != "")
                     {
@@ -326,7 +334,17 @@ namespace SO_NAIJI
                         {
                             MessageBox.Show(receiveDate + "の" + strPDFtag + "のPDFファイルがありませんでした");
                         }
-
+                    }
+                    if (strPDForder != null && strPDForder != "")
+                    {
+                        if (orderPaths.Length > 0)
+                        {
+                            pdf.InsertTargetPages(orderCopy, orderPaths[0], SoNoList.ToList());
+                        }
+                        else
+                        {
+                            MessageBox.Show(receiveDate + "の" + strPDForder + "のPDFファイルがありませんでした");
+                        }
                     }
                 }
             }
@@ -334,6 +352,8 @@ namespace SO_NAIJI
             stateCopy.Close();
             tagDoc.Close();
             tagCopy.Close();
+            orderDoc.Close();
+            orderCopy.Close();
         }
     }
 }
