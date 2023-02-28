@@ -50,6 +50,7 @@ namespace SO_NAIJI
             Properties.Settings.Default.txtOrderDate = this.txtOrderDate.Text;
             Properties.Settings.Default.txtPDFstate = this.txtPDFstate.Text;
             Properties.Settings.Default.txtPDFtag = this.txtPDFtag.Text;
+            Properties.Settings.Default.txtPDForder = this.txtPDForder.Text;
             Properties.Settings.Default.Save();
         }
 
@@ -72,6 +73,7 @@ namespace SO_NAIJI
             main._txtOrderDate = this.txtOrderDate.Text;
             main._strPDFstate = this.txtPDFstate.Text;
             main._strPDFtag = this.txtPDFtag.Text;
+            main._strPDForder = this.txtPDForder.Text;
             main.MainExecute();
         }
 
@@ -82,6 +84,7 @@ namespace SO_NAIJI
                 this.txtOrderDate.IsEnabled = true;
                 this.txtPDFstate.IsEnabled = true;
                 this.txtPDFtag.IsEnabled = true;
+                this.txtPDForder.IsEnabled = true;
             }
         }
 
@@ -90,6 +93,7 @@ namespace SO_NAIJI
             this.txtOrderDate.IsEnabled = false;
             this.txtPDFstate.IsEnabled = false;
             this.txtPDFtag.IsEnabled = false;
+            this.txtPDForder.IsEnabled = false;
         }
     }
 

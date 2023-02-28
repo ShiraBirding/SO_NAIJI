@@ -21,6 +21,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -131,6 +132,14 @@
             <TextBox Name="txtPDFtag" Text="{Binding Path=txtPDFtag,Source={x:Static properties:Settings.Default}}" />
         </Viewbox>
         <Viewbox 
+            Grid.Column="2" Grid.Row="7" >
+            <Label Content="PDF注文書識別語句"/>
+        </Viewbox>
+        <Viewbox
+            Grid.Column="3" Grid.Row="7" Stretch="Uniform" Margin="0,1,0,1">
+            <TextBox Name="txtPDForder" Text="{Binding Path=txtPDForder,Source={x:Static properties:Settings.Default}}" />
+        </Viewbox>
+        <Viewbox 
             Grid.Column="4" Grid.Row="6" >
             <Label Content="受注済CSV移動(フォルダ)"/>
         </Viewbox>
@@ -139,27 +148,27 @@
             <CheckBox Name ="checkMoveFolder" IsChecked="{Binding Path=checkMoveFolder,Source={x:Static properties:Settings.Default}}" />
         </Viewbox>
         <Viewbox 
-            Grid.Column="0" Grid.Row="7" >
+            Grid.Column="0" Grid.Row="8" >
             <Label Content="ヘッダーファイルパス"/>
         </Viewbox>
         <Viewbox
-            Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="5" Stretch="Uniform" Margin="0,1,0,1">
+            Grid.Column="1" Grid.Row="8" Grid.ColumnSpan="5" Stretch="Uniform" Margin="0,1,0,1">
             <TextBox Name="txtHeaderPath" Text="{Binding Path=txtHeaderPath,Source={x:Static properties:Settings.Default}}" />
         </Viewbox>
         <Viewbox 
-            Grid.Column="0" Grid.Row="8" >
+            Grid.Column="0" Grid.Row="9" >
             <Label Content="入力フォルダパス"/>
         </Viewbox>
         <Viewbox
-            Grid.Column="1" Grid.Row="8" Grid.ColumnSpan="5" Stretch="Uniform" Margin="0,1,0,1">
+            Grid.Column="1" Grid.Row="9" Grid.ColumnSpan="5" Stretch="Uniform" Margin="0,1,0,1">
             <TextBox Name="txtInputPath" Text="{Binding Path=txtInputPath,Source={x:Static properties:Settings.Default}}" />
         </Viewbox>
         <Viewbox 
-            Grid.Column="0" Grid.Row="9" >
+            Grid.Column="0" Grid.Row="10" >
             <Label Content="出力フォルダパス"/>
         </Viewbox>
         <Viewbox
-            Grid.Column="1" Grid.Row="9" Grid.ColumnSpan="5" Stretch="Uniform" Margin="0,1,0,1">
+            Grid.Column="1" Grid.Row="10" Grid.ColumnSpan="5" Stretch="Uniform" Margin="0,1,0,1">
             <TextBox Name="txtOutputPath" Text="{Binding Path=txtOutputPath,Source={x:Static properties:Settings.Default}}" />
         </Viewbox>
         <Viewbox
